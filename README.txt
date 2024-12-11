@@ -1,0 +1,1 @@
+This project is aiming to program a neural network mostly from scratch and to train it to classify hand-drawn digits from 0 to 9
