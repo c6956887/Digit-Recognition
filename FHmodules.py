@@ -4,21 +4,28 @@ import os
 from PIL import Image
 
 
-def getFileList(imgFolderPath=str):
+def getFileList(imgFolderPath,currentDir):
     '''When passed the path of the folder containing all the images it will return a list of the files within
-    alongside a list of the digits (as integers) that the files correspond to
+    alongside a list of the digits (as integers) that the files correspond to\n
     
-    This assumes a naming convention of (digit)_filename'''
+    This assumes a naming convention of (digit)_filename\n
+    
+    Requires the currend directory as well so as to return to it'''
 
     labels = []                                         # Initialises list of labels
+    pathlist = []
 
     os.chdir(imgFolderPath)                             # Changes current working directory to the path specified
     filelist = os.listdir()                             # Generates list of filenames as strings
 
+    
     for file in filelist:                               # Appends the first digit of the filenames to labels
         labels.append(file[0])
+        pathlist.append(currentDir+"/"+imgFolderPath+"/"+file)
 
-    return filelist, labels
+    os.chdir(currentDir)
+
+    return filelist, pathlist, labels
 
 
 def imgToDataframe(filename=str):
